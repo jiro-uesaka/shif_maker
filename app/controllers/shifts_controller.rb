@@ -14,13 +14,22 @@ class ShiftsController < ApplicationController
     redirect_to request.referer
   end
 
-  def index
-  end
-
   def edit
+    @workers = Worker.all
+    @patterns = Pattern.all
+    @shift = Shift.find(params[:id])
   end
 
-  def show
+  def update
+    shift = Shift.find(params[:id])
+    shift.update(shift_params)
+    redirect_to new_shift_path
+  end
+
+  def destroy
+    shift = Shift.find(params[:id])
+    shift.destroy
+    redirect_to new_shift_path
   end
   
   private

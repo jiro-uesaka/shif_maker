@@ -1,0 +1,7 @@
+<h3>勤務</h3>
+        <%= form_with model: @pattern do |f| %>
+            <p><%= f.text_field :name %></p>
+            <p><%= f.submit "保存" %></p>
+        <% end %>
+        <%= link_to "削除", pattern_path(@pattern.id), method: :delete %>
+        <%= link_to "戻る", :back %>

@@ -3,14 +3,14 @@
     <tr>
         <th>スタッフ一覧</th>
         <% @workers.each do |worker| %>
-            <td><%= worker.name %></td>
+            <td><%= link_to "#{worker.name}", edit_worker_path(worker.id) %></td>
         <% end %>
     </tr>
     
     <tr>
         <th>勤務一覧</th>
         <% @patterns.each do |pattern| %>
-            <td><%= pattern.name %></td>
+            <td><%= link_to "#{pattern.name}", edit_pattern_path(pattern.id) %></td>
         <% end %>
     </tr>
     
@@ -30,6 +30,8 @@
                 <td><%= @patterns.find_by(id: shift.send("day#{day}")).name %></td>
                 <% day += 1 %>
             <% end %>
+            <td><%= link_to "編集", edit_shift_path(shift.id) %></td>
+            <td><%= link_to "削除", edit_shift_path(shift.id), method: :delete %></td>
         </tr>
     <% end %>
 </table>

@@ -1,2 +1,50 @@
-<h1>Shifts#edit</h1>
-<p>Find me in app/views/shifts/edit.html.erb</p>
+<h3>シフト</h3>
+        <%= form_with model: @shift do |f| %>
+        <table border="1">
+            <tr>
+                <th>名前:<%= f.collection_select :name, @workers, :name, :name %></th>
+                <% day = 1 %>
+                <% while day <= 31 %>
+                    <th><%= day %>日</th>
+                    <% day += 1 %>
+                <% end %>
+            </tr>
+            <tr>
+                <td></td>
+                <td><%= f.collection_select :day1, @patterns, :id, :name %></td>
+                <td><%= f.collection_select :day2, @patterns, :id, :name %></td>
+                <td><%= f.collection_select :day3, @patterns, :id, :name %></td>
+                <td><%= f.collection_select :day4, @patterns, :id, :name %></td>
+                <td><%= f.collection_select :day5, @patterns, :id, :name %></td>
+                <td><%= f.collection_select :day6, @patterns, :id, :name %></td>
+                <td><%= f.collection_select :day7, @patterns, :id, :name %></td>
+                <td><%= f.collection_select :day8, @patterns, :id, :name %></td>
+                <td><%= f.collection_select :day9, @patterns, :id, :name %></td>
+                <td><%= f.collection_select :day10, @patterns, :id, :name %></td>
+                <td><%= f.collection_select :day11, @patterns, :id, :name %></td>
+                <td><%= f.collection_select :day12, @patterns, :id, :name %></td>
+                <td><%= f.collection_select :day13, @patterns, :id, :name %></td>
+                <td><%= f.collection_select :day14, @patterns, :id, :name %></td>
+                <td><%= f.collection_select :day15, @patterns, :id, :name %></td>
+                <td><%= f.collection_select :day16, @patterns, :id, :name %></td>
+                <td><%= f.collection_select :day17, @patterns, :id, :name %></td>
+                <td><%= f.collection_select :day18, @patterns, :id, :name %></td>
+                <td><%= f.collection_select :day19, @patterns, :id, :name %></td>
+                <td><%= f.collection_select :day20, @patterns, :id, :name %></td>
+                <td><%= f.collection_select :day21, @patterns, :id, :name %></td>
+                <td><%= f.collection_select :day22, @patterns, :id, :name %></td>
+                <td><%= f.collection_select :day23, @patterns, :id, :name %></td>
+                <td><%= f.collection_select :day24, @patterns, :id, :name %></td>
+                <td><%= f.collection_select :day25, @patterns, :id, :name %></td>
+                <td><%= f.collection_select :day26, @patterns, :id, :name %></td>
+                <td><%= f.collection_select :day27, @patterns, :id, :name %></td>
+                <td><%= f.collection_select :day28, @patterns, :id, :name %></td>
+                <td><%= f.collection_select :day29, @patterns, :id, :name %></td>
+                <td><%= f.collection_select :day30, @patterns, :id, :name %></td>
+                <td><%= f.collection_select :day31, @patterns, :id, :name %></td>
+            </tr>
+            <tr>
+                <td><%= f.submit "保存" %></td>
+            </tr>
+        </tbale>
+        <% end %>

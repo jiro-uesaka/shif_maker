@@ -1,0 +1,7 @@
+<h3>スタッフ</h3>
+        <%= form_with model: @worker do |f| %>
+            <p><%= f.text_field :name %></p>
+            <p><%= f.submit "保存" %></p>
+        <% end %>
+        <%= link_to "削除", worker_path(@worker.id), method: :delete %>
+        <%= link_to "戻る", :back %>
