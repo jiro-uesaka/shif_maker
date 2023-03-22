@@ -20,6 +20,7 @@ ActiveRecord::Schema.define(version: 2023_02_26_140540) do
 
   create_table "shifts", force: :cascade do |t|
     t.string "name"
+    t.integer "holiday"
     t.integer "day1"
     t.integer "day2"
     t.integer "day3"

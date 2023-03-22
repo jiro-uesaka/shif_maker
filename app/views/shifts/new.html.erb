@@ -16,6 +16,7 @@
     
     <tr>
         <th>シフト一覧</th>
+        <th>休日数</th>
         <% day = 1 %>
         <% while day <= 31 %>
             <th><%= day %>日</th>
@@ -25,13 +26,15 @@
     <% @shifts.each do |shift| %>
         <tr>
             <th><%= shift.name %></th>
+            <th><%= shift.holiday %>日</th>
             <% day = 1 %>
             <% while day <= 31 %>
                 <td><%= @patterns.find_by(id: shift.send("day#{day}")).name %></td>
                 <% day += 1 %>
             <% end %>
+            <td><%= link_to "全無", update_all_path(shift.id), method: :patch %></td>
             <td><%= link_to "編集", edit_shift_path(shift.id) %></td>
-            <td><%= link_to "削除", edit_shift_path(shift.id), method: :delete %></td>
+            <td><%= link_to "削除", shift_path(shift.id), method: :delete %></td>
         </tr>
     <% end %>
 </table>
@@ -60,7 +63,7 @@
                 <% end %>
             </tr>
             <tr>
-                <td></td>
+                <td>休日<%= f.number_field :holiday, max: 31 %></td>
                 <td><%= f.collection_select :day1, @patterns, :id, :name %></td>
                 <td><%= f.collection_select :day2, @patterns, :id, :name %></td>
                 <td><%= f.collection_select :day3, @patterns, :id, :name %></td>
@@ -98,5 +101,5 @@
             </tr>
         </tbale>
         <% end %>
-    <%= link_to "結果を出す", shifts_path %>
+    <%= link_to "結果を出す", calculate_path %>
 </div>

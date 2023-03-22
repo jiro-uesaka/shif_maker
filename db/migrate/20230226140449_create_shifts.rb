@@ -2,6 +2,7 @@ class CreateShifts < ActiveRecord::Migration[6.1]
   def change
     create_table :shifts do |t|
       t.string :name
+      t.integer :holiday
       t.integer :day1
       t.integer :day2
       t.integer :day3

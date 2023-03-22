@@ -10,7 +10,7 @@
                 <% end %>
             </tr>
             <tr>
-                <td></td>
+                <td>休日<%= f.number_field :holiday, max: 31 %></td>
                 <td><%= f.collection_select :day1, @patterns, :id, :name %></td>
                 <td><%= f.collection_select :day2, @patterns, :id, :name %></td>
                 <td><%= f.collection_select :day3, @patterns, :id, :name %></td>
@@ -48,3 +48,4 @@
             </tr>
         </tbale>
         <% end %>
+        <%= link_to "戻る", :back %>

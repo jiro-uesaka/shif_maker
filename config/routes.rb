@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
   root to: "homes#top"
+  patch "shifts/:id/update_all" => "shifts#update_all", as: "update_all"
+  get "shifts/calculate", as: "calculate"
   resources :shifts
   resources :workers
   resources :patterns
