@@ -13,13 +13,13 @@ class PatternsController < ApplicationController
     def update
         pattern = Pattern.find(params[:id])
         pattern.update(pattern_params)
-        redirect_to new_shift_path
+        redirect_to shifts_path
     end
     
     def destroy
         pattern = Pattern.find(params[:id])
         pattern.destroy
-        redirect_to new_shift_path
+        redirect_to shifts_path
     end
     
     def pattern_params

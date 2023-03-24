@@ -44,6 +44,7 @@ class ShiftsController < ApplicationController
   end
   
   def calculate
+    # 事前処理
     shifts = Shift.all
     shifts.each do |shift|
       num = 1
@@ -54,6 +55,34 @@ class ShiftsController < ApplicationController
         num += 1
       end
     end
+    
+    # 日次処理
+    day = 1
+    month_day = 31
+    min_worker = 2
+    max_worker = 3
+    while day <= month_day
+      # その日の出勤人数をカウント
+      shifts.each do |shift|
+        if shift.send("day#{day}") == 2
+          workers_count += 1
+        end
+      end
+      # その日の最低勤務者数を超えていたら、出勤になっているスタッフに休みを設定する
+      if workers_count > min_worker
+        shifts.each do |shift|
+          if shift.send("day#{day}") == 2
+            shift.send("day#{day}=",3)
+            break
+          end
+        end
+      end
+      day += 1
+    end
+    
+    # 月末処理
+    
+    # 最終保存
     shifts.each do |shift|
       shift.save
     end

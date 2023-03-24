@@ -13,13 +13,13 @@ class WorkersController < ApplicationController
     def update
         worker = Worker.find(params[:id])
         worker.update(worker_params)
-        redirect_to new_shift_path
+        redirect_to shifts_path
     end
     
     def destroy
         worker = Worker.find(params[:id])
         worker.destroy
-        redirect_to new_shift_path
+        redirect_to shifts_path
     end
     
     def worker_params
