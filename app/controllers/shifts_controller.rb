@@ -58,9 +58,11 @@ class ShiftsController < ApplicationController
     
     # 日次処理
     day = 1
+    workers_count = shifts.count
     month_day = 31
-    min_worker = 2
-    max_worker = 3
+    min_worker = 1
+    max_worker = 2
+    process = ""
     while day <= month_day
       # その日の出勤人数をカウント
       shifts.each do |shift|
@@ -68,11 +70,14 @@ class ShiftsController < ApplicationController
           workers_count += 1
         end
       end
-      # その日の最低勤務者数を超えていたら、出勤になっているスタッフに休みを設定する
-      if workers_count > min_worker
+      # その日の最大勤務者数を超えていたら、出勤になっているスタッフに休みを設定する
+      if workers_count > max_worker
+        most_holiday = shifts.maximum(:holiday)
         shifts.each do |shift|
-          if shift.send("day#{day}") == 2
+          if shift.send("day#{day}") == 2 && shift.holiday == most_holiday
             shift.send("day#{day}=",3)
+            process = "clear"
+            shift.holiday -= 1
             break
           end
         end
