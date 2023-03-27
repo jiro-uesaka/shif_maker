@@ -84,7 +84,66 @@ class ShiftsController < ApplicationController
       end
       day += 1
     end
-    
+    # ここから
+    if all_holiday == 0
+        # 　その日の現在の勤務者数＞その日の最大勤務者数になるか確認  
+        if worker_count > headcount.send("day#{day}_max")
+      # 　なる場合、各スタッフの残休日数を比較し、一番多いスタッフ（同数ならIDの若いスタッフ）の「day_x_」を休に  
+          most_holiday = workers.maximum(:holiday)
+          day_process = "unclear"
+          count = 0
+          while day_process == "unclear" && count <= 31 do
+            workers.each do |worker|
+              if worker.holiday == most_holiday && worker.send("day#{day}") == 2
+                worker.send("day#{day}=",1)
+                worker.decrement!(:holiday, 1)
+                worker.save
+                day_process = "clear"
+                break
+              end
+            end
+            most_holiday -= 1
+            count += 1
+          end
+          day += 1
+        # 　（残休日数は０なので-1になる）  
+        # 　ならなければ翌日の処理に移る  
+        else
+          day += 1
+        # 　なお、該当スタッフがすでに休になっている場合、次に残休日数が多い（複数名が該当する場合その中でIDが若い）スタッフに休を入れ翌日へ  
+        # 　（残休日数は０なので-1になる）  
+        end
+        # 一人でも１以上の場合  
+      else
+        # 　その日の現在の勤務者数-1≧その日の最低勤務者数になるか確認  
+        if (worker_count - 1) >= headcount.send("day#{day}_min")
+        # 　なる場合、各スタッフの残休日数を比較し、一番多いスタッフ（同数ならIDの若いスタッフ）の「○day_rest（もしくは中間テーブル）」を休に  
+          most_holiday = workers.maximum(:holiday)
+          day_process = "unclear"
+          count = 0
+          while day_process == "unclear" && count <= 31 do
+            workers.each do |worker|
+              if worker.holiday == most_holiday && worker.send("day#{day}") == 2
+                worker.send("day#{day}=",1)
+                worker.decrement!(:holiday, 1)
+                worker.save
+                day_process = "clear"
+                break
+              end
+            end
+            most_holiday -= 1
+            count += 1
+          end
+          day += 1
+        # 　ならなければ翌日の処理に移る  
+        else
+          day += 1
+        # 　なお、該当スタッフがすでに休になっている場合、次に残休日数が多い（複数名が該当する場合その中でIDが若い）スタッフに休を入れ翌日へ  
+        # 　その場合、次に残休日数が多いスタッフの残休日数が０以下でも休を入れる（0だったら-1になる）
+        end
+      end
+    end
+    # ここまで
     # 月末処理
     
     # 最終保存
