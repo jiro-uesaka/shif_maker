@@ -1,6 +1,10 @@
 <h3>勤務</h3>
         <%= form_with model: @pattern do |f| %>
-            <p><%= f.text_field :name %></p>
+            <p>NAME:<%= f.text_field :name %></p>
+            <p>TYPE:<%= f.select :status, {"出勤":"on","休日":"off"} %></p>
+            <p>START:<%= f.number_field :start_time %></p>
+            <p>END:<%= f.number_field :end_time %></p>
+            <p>REST:<%= f.number_field :rest_time %></p>
             <p><%= f.submit "保存" %></p>
         <% end %>
         <%= link_to "削除", pattern_path(@pattern.id), method: :delete %>

@@ -10,7 +10,16 @@
     <tr>
         <th>勤務一覧</th>
         <% @patterns.each do |pattern| %>
-            <td><%= link_to "#{pattern.name}", edit_pattern_path(pattern.id) %></td>
+            <td>
+                <%= link_to "#{pattern.name}", edit_pattern_path(pattern.id) %><br>
+                <%= pattern.start_time %>~<%= pattern.end_time %><br>
+                lest:<%= pattern.lest_time %><br>
+                <% if pattern.status == True %>
+                    出勤
+                <% else %>
+                    休日
+                <% end %>
+            </td>
         <% end %>
     </tr>
     
@@ -48,7 +57,11 @@
         <% end %>
     <h3>勤務</h3>
         <%= form_with model: @pattern do |f| %>
-            <p><%= f.text_field :name %></p>
+            <p>NAME:<%= f.text_field :name %></p>
+            <p>TYPE:<%= f.select :status, {"出勤":"on","休日":"off"} %></p>
+            <p>START:<%= f.number_field :start_time %></p>
+            <p>END:<%= f.number_field :end_time %></p>
+            <p>REST:<%= f.number_field :rest_time %></p>
             <p><%= f.submit "保存" %></p>
         <% end %>
     <h3>シフト</h3>

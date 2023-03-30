@@ -23,6 +23,6 @@ class PatternsController < ApplicationController
     end
     
     def pattern_params
-        params.require(:pattern).permit(:name)
+        params.require(:pattern).permit(:name,:status,:start_time,:end_time,:rest_time)
     end
 end

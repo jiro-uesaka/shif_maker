@@ -10,40 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_03_29_133600) do
-
-  create_table "configurations", force: :cascade do |t|
-    t.integer "holiday_interval"
-    t.integer "day1_max"
-    t.integer "day1_min"
-    t.integer "day2_max"
-    t.integer "day2_min"
-    t.integer "day3_max"
-    t.integer "day3_min"
-    t.integer "day4_max"
-    t.integer "day4_min"
-    t.integer "day5_max"
-    t.integer "day5_min"
-    t.integer "day6_max"
-    t.integer "day6_min"
-    t.integer "day7_max"
-    t.integer "day7_min"
-    t.integer "day8_max"
-    t.integer "day8_min"
-    t.integer "day9_max"
-    t.integer "day9_min"
-    t.integer "day10_max"
-    t.integer "day10_min"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
+ActiveRecord::Schema.define(version: 2023_02_26_140540) do
 
   create_table "patterns", force: :cascade do |t|
     t.string "name"
-    t.boolean "status", default: false
+    t.string "status"
     t.integer "start_time"
     t.integer "end_time"
-    t.integer "lest_time"
+    t.integer "rest_time"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
