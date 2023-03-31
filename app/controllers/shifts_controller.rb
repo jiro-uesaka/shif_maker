@@ -29,8 +29,8 @@ class ShiftsController < ApplicationController
   def update_all
     shift = Shift.find(params[:id])
     num = 1
-    while num <= 31
-      shift.send("day#{num}=",1)
+    while num <= 10
+      shift["day#{num}"] = 1
       num += 1
     end
     shift.save
@@ -48,9 +48,9 @@ class ShiftsController < ApplicationController
     shifts = Shift.all
     shifts.each do |shift|
       num = 1
-      while num <= 31
-        if shift.send("day#{num}") == 1
-          shift.send("day#{num}=",2)
+      while num <= 10
+        if shift["day#{num}"] == 1
+          shift["day#{num}"] = 2
         end
         num += 1
       end
@@ -59,7 +59,7 @@ class ShiftsController < ApplicationController
     # 日次処理
     day = 1
     workers_count = shifts.count
-    month_day = 31
+    month_day = 10
     min_worker = 1
     max_worker = 2
     process = ""

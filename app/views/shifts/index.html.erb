@@ -13,8 +13,8 @@
             <td>
                 <%= link_to "#{pattern.name}", edit_pattern_path(pattern.id) %><br>
                 <%= pattern.start_time %>~<%= pattern.end_time %><br>
-                lest:<%= pattern.lest_time %><br>
-                <% if pattern.status == True %>
+                lest:<%= pattern.rest_time %><br>
+                <% if pattern.status == "on" %>
                     出勤
                 <% else %>
                     休日
