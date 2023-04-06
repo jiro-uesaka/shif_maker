@@ -4,13 +4,13 @@
             <tr>
                 <th>名前:<%= f.collection_select :name, @workers, :name, :name %></th>
                 <% day = 1 %>
-                <% while day <=  %>
+                <% while day <= 10 %>
                     <th><%= day %>日</th>
                     <% day += 1 %>
                 <% end %>
             </tr>
             <tr>
-                <td>休日<%= f.number_field :holiday, max: 31 %></td>
+                <td>休日<%= f.number_field :holiday, max: 10 %></td>
                 <td><%= f.collection_select :day1, @patterns, :id, :name %></td>
                 <td><%= f.collection_select :day2, @patterns, :id, :name %></td>
                 <td><%= f.collection_select :day3, @patterns, :id, :name %></td>
