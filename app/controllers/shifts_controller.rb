@@ -93,17 +93,22 @@ class ShiftsController < ApplicationController
         # そのスタッフが【出勤】以外の出勤パターン、もしくはそのスタッフを休みにすると最低勤務者数を割る場合どんどん前日に遡っていく
         else
           target_day = (day - 1)
-          if target_day > 0
-            while target_day > 0
-              workers_count = 0
-              shifts.each do |shift|
-                if pattern_work.include?(shift["day#{target_day}"])
-                  workers_count += 1
-                end
+          while target_day > 0
+            workers_count = 0
+            shifts.each do |shift|
+              if pattern_work.include?(shift["day#{target_day}"])
+                workers_count += 1
               end
             end
-          else
-            redirect_to request.referer
+            if shifts[current_worker]["day#{target_day}"] == 2 && workers_count > min_worker
+              shifts[current_worker]["day#{day}"] = 6
+              day = target_day
+              work_series = 0
+              break
+            else
+              target_day -= 1
+            end
+            # もしそのスタッフでだめなら前のスタッフで確認
           end
         end
       end
