@@ -109,7 +109,6 @@ class ShiftsController < ApplicationController
               target_day -= 1
             end
             # もしそのスタッフでだめなら前のスタッフで確認
-            # 現状難しい？
           end
         end
       end
