@@ -123,16 +123,16 @@ class ShiftsController < ApplicationController
         end
       end
       # その日の最大勤務者数を超えていたら、出勤になっているスタッフに休みを設定する
-      # if workers_count > min_worker
-      #   most_holiday = shifts.maximum(:holiday)
-      #   shifts.each do |shift|
-      #     if shift.send("day#{day}") == 2 && shift.holiday == most_holiday
-      #       shift.send("day#{day}=",3)
-      #       process = "clear"
-      #       shift.holiday -= 1
-      #       break
-      #     end
-      #   end
+      if workers_count > min_worker
+        most_holiday = shifts.maximum(:holiday)
+        shifts.each do |shift|
+          if shift.send("day#{day}") == 2 && shift.holiday == most_holiday
+            shift.send("day#{day}=",3)
+            process = "clear"
+            shift.holiday -= 1
+            break
+          end
+        end
       # end
       
       day += 1
